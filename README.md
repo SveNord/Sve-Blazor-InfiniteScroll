@@ -43,7 +43,7 @@ Simply wrap the desired content in the `InfiteScroll` component and add any empt
 
         	@*The target element that we observe. Once this is reached the callback will be triggered.*@
         	<li class="list-group-item" id="observerTarget"></li>
-    </ul>
+    	</ul>
 </InfiniteScroll>
 
 @code {
