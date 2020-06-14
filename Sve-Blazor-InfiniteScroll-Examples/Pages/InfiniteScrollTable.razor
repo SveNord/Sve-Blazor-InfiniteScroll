@@ -1,0 +1,98 @@
+﻿@page "/InfiniteScrollTable"
+
+@using lib = Sve.Blazor.InfiniteScroll.Components;
+@using Sve.Blazor.InfiniteScroll.Examples.Data;
+
+@inject WeatherForecastService ForecastService
+
+<h1>Multiple Infinite scrolls on a table</h1>
+
+@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div style="max-height: 400px; overflow: auto;">
+        <Sve.Blazor.InfiniteScroll.Components.InfiniteScroll ObserverTargetId="observerTarget" ObservableTargetReached="(e) => FetchForecasts()">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Temp. (C)</th>
+                        <th>Temp. (F)</th>
+                        <th>Summary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var forecast in forecasts)
+                    {
+                        <tr>
+                            <td>@forecast.Date.ToShortDateString()</td>
+                            <td>@forecast.TemperatureC</td>
+                            <td>@forecast.TemperatureF</td>
+                            <td>@forecast.Summary</td>
+                        </tr>
+                    }
+
+                    @*The target element that we observe. Once this is reached the callback will be triggered.*@
+                    <span id="observerTarget"></span>
+                </tbody>
+            </table>
+        </Sve.Blazor.InfiniteScroll.Components.InfiniteScroll>
+    </div>
+
+    <br/>
+
+    <div style="max-height: 400px; overflow: auto;">
+        <Sve.Blazor.InfiniteScroll.Components.InfiniteScroll ObserverTargetId="observerTarget2" ObservableTargetReached="(e) => FetchForecasts2()">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Temp. (C)</th>
+                        <th>Temp. (F)</th>
+                        <th>Summary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var forecast in forecasts2)
+                    {
+                        <tr>
+                            <td>@forecast.Date.ToShortDateString()</td>
+                            <td>@forecast.TemperatureC</td>
+                            <td>@forecast.TemperatureF</td>
+                            <td>@forecast.Summary</td>
+                        </tr>
+                    }
+
+                    @*The target element that we observe. Once this is reached the callback will be triggered.*@
+                    <span id="observerTarget2"></span>
+                </tbody>
+            </table>
+        </Sve.Blazor.InfiniteScroll.Components.InfiniteScroll>
+    </div>
+}
+
+@code {
+    private List<WeatherForecast> forecasts = new List<WeatherForecast>();
+    private List<WeatherForecast> forecasts2 = new List<WeatherForecast>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await FetchForecasts(); // Initial data
+        await FetchForecasts2(); // Initial data
+    }
+
+    private async Task FetchForecasts()
+    {
+        var fetchedForecasts = await ForecastService.GetForecastAsync(DateTime.Now, amount: 20);
+        forecasts.AddRange(fetchedForecasts); // Make sure to use AddRange() to append the new items
+    }
+
+    private async Task FetchForecasts2()
+    {
+        var fetchedForecasts = await ForecastService.GetForecastAsync(DateTime.Now, amount: 20);
+        forecasts2.AddRange(fetchedForecasts); // Make sure to use AddRange() to append the new items
+    }
+}

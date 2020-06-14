@@ -1,0 +1,42 @@
+﻿@page "/"
+@page "/InfiniteScroll"
+
+@using Sve.Blazor.InfiniteScroll.Examples.Data;
+
+@inject WeatherForecastService ForecastService
+
+<h1>Infinite scroll</h1>
+
+@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+        <Sve.Blazor.InfiniteScroll.Components.InfiniteScroll ObserverTargetId="observerTarget" ObservableTargetReached="(e) => FetchForecasts()">
+            <ul>
+                @foreach (var forecast in forecasts)
+                {
+                    <li class="list-group-item">@forecast.Date: @forecast.TemperatureC-@forecast.TemperatureF (@forecast.Summary)</li>
+                }
+
+                @*The target element that we observe. Once this is reached the callback will be triggered.*@
+                <li class="list-group-item" id="observerTarget"></li>
+            </ul>
+        </Sve.Blazor.InfiniteScroll.Components.InfiniteScroll>   
+}
+
+@code {
+    private List<WeatherForecast> forecasts = new List<WeatherForecast>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await FetchForecasts(); // Initial data
+    }
+
+    private async Task FetchForecasts()
+    {
+        var fetchedForecasts = await ForecastService.GetForecastAsync(DateTime.Now, amount: 20);
+        forecasts.AddRange(fetchedForecasts); // Make sure to use AddRange() to append the new items
+    }
+}

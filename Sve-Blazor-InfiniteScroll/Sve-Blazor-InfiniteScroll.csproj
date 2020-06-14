@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RazorLangVersion>3.0</RazorLangVersion>
+    <RootNamespace>Sve.Blazor.InfiniteScroll</RootNamespace>
+    <AssemblyName>Sve.Blazor.InfiniteScroll</AssemblyName>
+    <Nullable>enable</Nullable>
+    <LangVersion>8.0</LangVersion>
+    <Version>1.0.0-alpha</Version>
+    <Authors>Sven Matthys</Authors>
+    <Product>SveBlazorInfiniteScroll</Product>
+    <Description>Simplistic implementation of an infinite scroll component for Blazor</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/SveNord/Sve-Blazor-InfiniteScroll</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/SveNord/Sve-Blazor-InfiniteScroll</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>blazor, infinite scroll, component</PackageTags>
+    <PackageReleaseNotes>
+      - Initial major alpha release
+    </PackageReleaseNotes>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.3" />
+  </ItemGroup>
+
+</Project>
