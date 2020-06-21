@@ -31,7 +31,7 @@ Simplistic implementation of an infinite scroll component for Blazor.
 
 ## Usage
 
-Simply wrap the desired content in the `InfiniteScroll` component and add any empty html element with a unique id after the your data elements: 
+Simply wrap the desired content in the `InfiniteScroll` component and add any empty html element with a unique id after the data elements: 
 
 ```csharp
 <InfiniteScroll ObserverTargetId="observerTarget" ObservableTargetReached="(e) => FetchForecasts()">
