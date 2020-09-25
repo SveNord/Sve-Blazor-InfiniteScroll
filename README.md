@@ -27,7 +27,7 @@ Simplistic implementation of an infinite scroll component for Blazor.
 
 3. Reference js interop file:
    
-    Add `<script src="/_content/Sve.Blazor.InfiniteScroll/js/Observer.js"></script>` to your _Host.cshtml or your index.html
+    Add `<script src="_content/Sve.Blazor.InfiniteScroll/js/Observer.js"></script>` to your _Host.cshtml or your index.html
 
 ## Usage
 
